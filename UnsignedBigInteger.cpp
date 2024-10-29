@@ -3,9 +3,6 @@
 
 UnsignedBigInteger::UnsignedBigInteger(const UnsignedBigInteger& val, size_t shift)
 {
-	/*unsigned char* val_pt = reinterpret_cast<unsigned char*>(&val);
-	UnsignedBigInteger::data_size > this->data_size ? throw std::overflow_error("val must be smaller than data_size") : NULL;*/
-	//sizeof(T)+shift > this->data_size ? throw std::overflow_error("buffer overflow") : NULL;
 	if (UnsignedBigInteger::data_size + shift > this->data_size)
 	{
 		for (size_t i = this->data_size - shift; i < UnsignedBigInteger::data_size; i++)

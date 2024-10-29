@@ -5,6 +5,7 @@
 template<std::integral T>
 UnsignedBigInteger::UnsignedBigInteger(const T val)
 {
+	if (val < 0) { throw std::runtime_error("value must be greater than zero"); }
 	unsigned const char* val_pt = reinterpret_cast<unsigned const char*>(&val);
 	sizeof(T) > this->data_size ? throw std::overflow_error("val must be smaller than data_size") : NULL;
 	for (size_t i = 0; i < sizeof(T); i++)

@@ -77,6 +77,17 @@ TEST_CASE("subtraction operator") {
 	REQUIRE(z-z== 0);
 }
 
+TEST_CASE("multiplication") {
+	UnsignedBigInteger x{ 0 };
+	UnsignedBigInteger y{ 1 };
+	UnsignedBigInteger z{ std::numeric_limits<long long>::max() };
+	UnsignedBigInteger n{ 51233 };
+	REQUIRE(x*y==0);
+	REQUIRE(y*x==0);
+	REQUIRE(z*y==z);
+	REQUIRE(n*3==153699);
+}
+
 int main(int argc, char* argv[]) {
 	int result = Catch::Session().run(argc, argv);
 	return result;

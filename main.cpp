@@ -66,6 +66,17 @@ TEST_CASE("addition operator") {
 	REQUIRE(x + std::numeric_limits<long long>::max() == z);
 }
 
+TEST_CASE("subtraction operator") {
+	UnsignedBigInteger x{ 0 };
+	UnsignedBigInteger y{ 1 };
+	UnsignedBigInteger z{ std::numeric_limits<long long>::max() };
+	REQUIRE_THROWS(x - y);
+	REQUIRE_THROWS(x - z);
+	REQUIRE(y-x==1);
+	REQUIRE(z-y== std::numeric_limits<long long>::max()-1);
+	REQUIRE(z-z== 0);
+}
+
 int main(int argc, char* argv[]) {
 	int result = Catch::Session().run(argc, argv);
 	return result;

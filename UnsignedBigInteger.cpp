@@ -108,7 +108,7 @@ UnsignedBigInteger UnsignedBigInteger::operator/(const UnsignedBigInteger& other
 	size_t den_size = 0;
 	size_t num_size = 0;
 
-	for (size_t i = UnsignedBigInteger::data_size - 1; i >= 0; i--)
+	for (long i = UnsignedBigInteger::data_size - 1; i >= 0; i--)
 	{
 		if (denominator.data[i] == 0) { continue; }
 		den_size = i + 1;
@@ -118,7 +118,7 @@ UnsignedBigInteger UnsignedBigInteger::operator/(const UnsignedBigInteger& other
 
 	do
 	{
-		for (size_t i = UnsignedBigInteger::data_size - 1; i >= 0; i--)
+		for (long i = UnsignedBigInteger::data_size - 1; i >= 0; i--)
 		{
 			if (numerator.data[i] == 0) { continue; }
 			num_size = i + 1;
@@ -177,7 +177,7 @@ UnsignedBigInteger UnsignedBigInteger::operator%(const UnsignedBigInteger& other
 	size_t den_size{ 0 };
 	size_t num_size{ 0 };
 
-	for (size_t i = UnsignedBigInteger::data_size - 1; i >= 0; i--)
+	for (long i = UnsignedBigInteger::data_size - 1; i >= 0; i--)
 	{
 		if (denominator.data[i] == 0) { continue; }
 		den_size = i + 1;
@@ -191,7 +191,7 @@ UnsignedBigInteger UnsignedBigInteger::operator%(const UnsignedBigInteger& other
 
 		unsigned char temp = numerator.data[0];
 
-		for (size_t i = UnsignedBigInteger::data_size - 1; i > 0; i--)
+		for (long i = UnsignedBigInteger::data_size - 1; i >= 0; i--)
 		{
 			if (numerator.data[i] == 0) { continue; }
 			num_size = i + 1;
@@ -244,7 +244,7 @@ UnsignedBigInteger UnsignedBigInteger::operator%(const UnsignedBigInteger& other
 }
 
 bool UnsignedBigInteger::operator==(const UnsignedBigInteger& other) const {
-	for (size_t i = UnsignedBigInteger::data_size - 1; i > 0; i--)
+	for (long i = UnsignedBigInteger::data_size - 1; i >= 0; i--)
 	{
 		if (this->data[i] != other.data[i]) {
 			return false;
@@ -253,7 +253,7 @@ bool UnsignedBigInteger::operator==(const UnsignedBigInteger& other) const {
 }
 
 bool UnsignedBigInteger::operator<(const UnsignedBigInteger& other) const {
-	for (size_t i = UnsignedBigInteger::data_size - 1; i > 0; i--)
+	for (long i = UnsignedBigInteger::data_size - 1; i > 0; i--)
 	{
 		if (this->data[i] < other.data[i]) {
 			return true;
@@ -266,7 +266,7 @@ bool UnsignedBigInteger::operator<(const UnsignedBigInteger& other) const {
 }
 
 bool UnsignedBigInteger::operator>(const UnsignedBigInteger& other) const {
-	for (size_t i = UnsignedBigInteger::data_size - 1; i > 0; i--)
+	for (long i = UnsignedBigInteger::data_size - 1; i > 0; i--)
 	{
 		if (this->data[i] > other.data[i]) {
 			return true;

@@ -33,9 +33,19 @@ TEST_CASE("is equal operator") {
 	REQUIRE_FALSE(z==x);
 	REQUIRE_FALSE(z==y);
 
+	REQUIRE(x==0);
+	REQUIRE_FALSE(x==1);
+	REQUIRE_FALSE(x== std::numeric_limits<long long>::max());
+	REQUIRE(y==1);
+	REQUIRE_FALSE(y==0);
+	REQUIRE_FALSE(y== std::numeric_limits<long long>::max());
+	REQUIRE(z==std::numeric_limits<long long>::max());
+	REQUIRE_FALSE(z==0);
+	REQUIRE_FALSE(z==1);
+
 }
 
-TEST_CASE("equal opeartor") {
+TEST_CASE("equal operator") {
 	UnsignedBigInteger x{ 0 };
 	UnsignedBigInteger y{ 1 };
 	UnsignedBigInteger z{ std::numeric_limits<long long>::max() };
@@ -45,6 +55,15 @@ TEST_CASE("equal opeartor") {
 	REQUIRE(x == y);
 	REQUIRE_NOTHROW(z=y);
 	REQUIRE(z == y);
+}
+
+TEST_CASE("addition operator") {
+	UnsignedBigInteger x{ 0 };
+	UnsignedBigInteger y{ 1 };
+	UnsignedBigInteger z{ std::numeric_limits<long long>::max() };
+	REQUIRE(x+y==y);
+	REQUIRE(x+2==2);
+	REQUIRE(x + std::numeric_limits<long long>::max() == z);
 }
 
 int main(int argc, char* argv[]) {

@@ -104,6 +104,21 @@ TEST_CASE("division operator") {
 	REQUIRE(five / two == two);
 }
 
+TEST_CASE("modulo operator") {
+
+	UnsignedBigInteger zero{ 0 };
+	UnsignedBigInteger one{ 1 };
+	UnsignedBigInteger two{ 2 };
+	UnsignedBigInteger five{ 5 };
+	UnsignedBigInteger many{ std::numeric_limits<unsigned long long>::max() };
+
+	REQUIRE_THROWS(one % zero);
+	REQUIRE(many % one==zero);
+	REQUIRE(many % two==one);
+	REQUIRE(two % many == two);
+	REQUIRE(two % two == zero);
+}
+
 int main(int argc, char* argv[]) {
 	int result = Catch::Session().run(argc, argv);
 	return result;

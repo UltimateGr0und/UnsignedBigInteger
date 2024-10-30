@@ -171,76 +171,83 @@ UnsignedBigInteger UnsignedBigInteger::operator/(const UnsignedBigInteger& other
 	return result;
 }
 
+//UnsignedBigInteger UnsignedBigInteger::operator%(const UnsignedBigInteger& other) const {
+//	UnsignedBigInteger numerator{ *this };
+//	UnsignedBigInteger denominator{ other };
+//	size_t den_size{ 0 };
+//	size_t num_size{ 0 };
+//
+//	for (long i = UnsignedBigInteger::data_size - 1; i >= 0; i--)
+//	{
+//		if (denominator.data[i] == 0) { continue; }
+//		den_size = i + 1;
+//		break;
+//	}
+//	if (den_size == 0) { throw std::runtime_error("diveded by zero"); }
+//
+//	do
+//	{
+//		num_size = 0;
+//
+//		unsigned char temp = numerator.data[0];
+//
+//		for (long i = UnsignedBigInteger::data_size - 1; i >= 0; i--)
+//		{
+//			if (numerator.data[i] == 0) { continue; }
+//			num_size = i + 1;
+//			break;
+//		}
+//
+//		if (num_size == 0 || numerator < denominator) { break; }
+//
+//		unsigned short num_buff = 0;
+//		unsigned short den_buff = 0;
+//
+//		if (numerator.data[num_size - 1] >= denominator.data[den_size - 1]) {
+//			num_buff = numerator.data[num_size - 1];
+//			den_buff = denominator.data[den_size - 1];
+//		}
+//		else {
+//			if (num_size > 1)
+//				num_buff = numerator.data[num_size - 1] * 256 + numerator.data[num_size - 2];
+//			else
+//				break;
+//			den_buff = denominator.data[den_size - 1];
+//			num_size--;
+//		}
+//
+//		unsigned char mltp = num_buff / den_buff;
+//		size_t shift = num_size >= den_size ? num_size - den_size : 0;
+//		UnsignedBigInteger raw_diff{ denominator * mltp };
+//		UnsignedBigInteger diff{ raw_diff, shift };
+//
+//		while (diff > numerator)
+//		{
+//			if (mltp > 1)
+//			{
+//				mltp--;
+//				raw_diff = denominator * mltp;
+//				diff = UnsignedBigInteger{ raw_diff, shift };
+//			}
+//			else {
+//				mltp = 255;
+//				shift--;
+//				raw_diff = denominator * mltp;
+//				diff = UnsignedBigInteger{ raw_diff, shift };
+//			}
+//		}
+//		numerator = numerator - diff;
+//
+//	} while (num_size >= den_size);
+//
+//	return numerator;
+//}
+
 UnsignedBigInteger UnsignedBigInteger::operator%(const UnsignedBigInteger& other) const {
-	UnsignedBigInteger numerator{ *this };
-	UnsignedBigInteger denominator{ other };
-	size_t den_size{ 0 };
-	size_t num_size{ 0 };
-
-	for (long i = UnsignedBigInteger::data_size - 1; i >= 0; i--)
-	{
-		if (denominator.data[i] == 0) { continue; }
-		den_size = i + 1;
-		break;
-	}
-	if (den_size == 0) { throw std::runtime_error("diveded by zero"); }
-
-	do
-	{
-		num_size = 0;
-
-		unsigned char temp = numerator.data[0];
-
-		for (long i = UnsignedBigInteger::data_size - 1; i >= 0; i--)
-		{
-			if (numerator.data[i] == 0) { continue; }
-			num_size = i + 1;
-			break;
-		}
-
-		if (num_size == 0 || numerator < denominator) { break; }
-
-		unsigned short num_buff = 0;
-		unsigned short den_buff = 0;
-
-		if (numerator.data[num_size - 1] >= denominator.data[den_size - 1]) {
-			num_buff = numerator.data[num_size - 1];
-			den_buff = denominator.data[den_size - 1];
-		}
-		else {
-			if (num_size > 1)
-				num_buff = numerator.data[num_size - 1] * 256 + numerator.data[num_size - 2];
-			else
-				break;
-			den_buff = denominator.data[den_size - 1];
-			num_size--;
-		}
-
-		unsigned char mltp = num_buff / den_buff;
-		size_t shift = num_size >= den_size ? num_size - den_size : 0;
-		UnsignedBigInteger raw_diff{ denominator * mltp };
-		UnsignedBigInteger diff{ raw_diff, shift };
-
-		while (diff > numerator)
-		{
-			if (mltp > 1)
-			{
-				mltp--;
-				raw_diff = denominator * mltp;
-				diff = UnsignedBigInteger{ raw_diff, shift };
-			}
-			else {
-				mltp = 255;
-				shift--;
-				raw_diff = denominator * mltp;
-				diff = UnsignedBigInteger{ raw_diff, shift };
-			}
-		}
-		numerator = numerator - diff;
-
-	} while (num_size >= den_size);
-
-	return numerator;
+	UnsignedBigInteger quotient = *this / other;
+	UnsignedBigInteger mltp = quotient * other;
+	UnsignedBigInteger res = *this - mltp;
+	return res;
 }
 
 bool UnsignedBigInteger::operator==(const UnsignedBigInteger& other) const {

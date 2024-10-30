@@ -48,8 +48,9 @@ int main(int argc, char* argv[]) {
 //	UnsignedBigInteger c{a*b};
 //	c = c / b;
 //	std::cout << c.ToString()<<'\n';
-//	a = 1;
-//	b = UINT64_MAX;
-//	c = a % b;
+//	c = 1;
+//	//a = 1;
+//	//b = UINT64_MAX;
+//	//c = a % b;
 //	std::cout << c.ToString();
 //}

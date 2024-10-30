@@ -77,7 +77,7 @@ TEST_CASE("subtraction operator") {
 	REQUIRE(z-z== 0);
 }
 
-TEST_CASE("multiplication") {
+TEST_CASE("multiplication operator") {
 	UnsignedBigInteger x{ 0 };
 	UnsignedBigInteger y{ 1 };
 	UnsignedBigInteger z{ std::numeric_limits<long long>::max() };
@@ -86,6 +86,22 @@ TEST_CASE("multiplication") {
 	REQUIRE(y*x==0);
 	REQUIRE(z*y==z);
 	REQUIRE(n*3==153699);
+}
+
+TEST_CASE("division operator") {
+
+	UnsignedBigInteger zero{ 0 };
+	UnsignedBigInteger one{ 1 };
+	UnsignedBigInteger two{ 2 };
+	UnsignedBigInteger five{ 5 };
+	UnsignedBigInteger many{ std::numeric_limits<long long>::max() };
+
+	REQUIRE_THROWS(one / zero);
+	REQUIRE(zero / one == zero);
+	REQUIRE(one / one == one);
+	REQUIRE(many / one == many);
+	REQUIRE(many / two == std::numeric_limits<long long>::max() / 2);
+	REQUIRE(five / two == two);
 }
 
 int main(int argc, char* argv[]) {

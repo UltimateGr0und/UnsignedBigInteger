@@ -22,7 +22,7 @@ TEST_CASE("constructors") {
 TEST_CASE("is equal operator") {
 	UnsignedBigInteger x{0};
 	UnsignedBigInteger y{1};
-	UnsignedBigInteger z{ std::numeric_limits<int>::max() };
+	UnsignedBigInteger z{ std::numeric_limits<long long>::max() };
 	REQUIRE(x==x);
 	REQUIRE_FALSE(x==y);
 	REQUIRE_FALSE(x==z);
@@ -33,6 +33,18 @@ TEST_CASE("is equal operator") {
 	REQUIRE_FALSE(z==x);
 	REQUIRE_FALSE(z==y);
 
+}
+
+TEST_CASE("equal opeartor") {
+	UnsignedBigInteger x{ 0 };
+	UnsignedBigInteger y{ 1 };
+	UnsignedBigInteger z{ std::numeric_limits<long long>::max() };
+	REQUIRE_NOTHROW(x=z);
+	REQUIRE(x == z);
+	REQUIRE_NOTHROW(x=y);
+	REQUIRE(x == y);
+	REQUIRE_NOTHROW(z=y);
+	REQUIRE(z == y);
 }
 
 int main(int argc, char* argv[]) {

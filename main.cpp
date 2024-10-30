@@ -119,22 +119,22 @@ TEST_CASE("modulo operator") {
 	REQUIRE(two % two == zero);
 }
 
+TEST_CASE("ToString") {
+
+	UnsignedBigInteger zero{ 0 };
+	UnsignedBigInteger one{ 1 };
+	UnsignedBigInteger two{ 2 };
+	UnsignedBigInteger five{ 5 };
+	UnsignedBigInteger many{ std::numeric_limits<unsigned long long>::max() };
+
+	REQUIRE(zero.ToString()=="0");
+	REQUIRE(one.ToString()=="1");
+	REQUIRE(two.ToString()=="2");
+	REQUIRE(five.ToString()=="5");
+	REQUIRE(many.ToString()=="18446744073709551615");
+}
+
 int main(int argc, char* argv[]) {
 	int result = Catch::Session().run(argc, argv);
 	return result;
 }
-
-//int main()
-//{
-//	std::cout << UINT64_MAX<<'\n';
-//	UnsignedBigInteger a{ UINT64_MAX};
-//	UnsignedBigInteger b{ UINT64_MAX/256 };
-//	UnsignedBigInteger c{a*b};
-//	c = c / b;
-//	std::cout << c.ToString()<<'\n';
-//	c = 1;
-//	//a = 1;
-//	//b = UINT64_MAX;
-//	//c = a % b;
-//	std::cout << c.ToString();
-//}

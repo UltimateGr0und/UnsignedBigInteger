@@ -294,9 +294,9 @@ bool UnsignedBigInteger::operator<=(const UnsignedBigInteger& other) const {
 }
 
 void UnsignedBigInteger::clear() {
-	for (auto c : this->data)
+	for (size_t i = 0; i < this->data_size; i++)
 	{
-		c = 0;
+		data[i] = 0;
 	}
 }
 

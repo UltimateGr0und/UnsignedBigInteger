@@ -134,6 +134,18 @@ TEST_CASE("ToString") {
 	REQUIRE(many.ToString()=="18446744073709551615");
 }
 
+TEST_CASE("Benchmarks") {
+	BENCHMARK("modulo 10%3") {
+		return UnsignedBigInteger{ 10 } % 3;
+	};
+	BENCHMARK("modulo 1%max") {
+		return UnsignedBigInteger{ 1 } % std::numeric_limits<long long>::max();
+	};
+	BENCHMARK("modulo max%2") {
+		return UnsignedBigInteger{ std::numeric_limits<long long>::max() } % 2;
+	};
+}
+
 int main(int argc, char* argv[]) {
 	int result = Catch::Session().run(argc, argv);
 	return result;
